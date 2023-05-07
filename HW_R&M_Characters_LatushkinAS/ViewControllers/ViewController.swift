@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     }
     
     private func fetchCharacter() {
-        let urlString = "https://rickandmortyapi.com/api/character/108"
+        let urlString = "https://rickandmortyapi.com/api/character"
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -26,8 +26,8 @@ class ViewController: UIViewController {
             
             do {
                 let decoder = JSONDecoder()
-                let character = try decoder.decode(Character.self, from: data)
-                print(character)
+                let CharacterListResponse = try decoder.decode(CharacterListResponse.self, from: data)
+                print(CharacterListResponse)
             } catch {
                 print(error.localizedDescription)
             }
